@@ -1,0 +1,46 @@
+# Filename: request_validation_action.yml
+actionType: yourns.RequestValidation
+label: Request Validation
+description: |
+  A user’s request to push a specific model version into the validation environment.
+
+properties:
+  - name: requestId
+    type: string
+    required: true
+    description: Unique key for this validation request.
+  - name: requestedOn
+    type: datetime
+    required: true
+    description: Timestamp when the request was submitted.
+  - name: requestedBy
+    type: string
+    required: true
+    description: User who submitted the validation request.
+  - name: status
+    type: string
+    required: true
+    description: Current state of the request.
+    enum:
+      - Pending
+      - Approved
+      - Rejected
+  - name: processedOn
+    type: datetime
+    description: Timestamp when the request was approved or rejected.
+  - name: processedBy
+    type: string
+    description: Admin who processed the request.
+  - name: comments
+    type: string
+    description: Optional notes or reason for rejection.
+
+links:
+  - name: caseRef
+    targetType: yourns.IntegrationCase
+    cardinality: ONE
+    description: Case under which this request was made.
+  - name: modelRef
+    targetType: yourns.ModelVersion
+    cardinality: ONE
+    description: The model version to push to validation.

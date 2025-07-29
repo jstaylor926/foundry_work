@@ -1,0 +1,42 @@
+# Filename: integration_task.yml
+objectType: yourns.IntegrationTask
+label: Integration Task
+description: |
+  A discrete work item or checklist step within an IntegrationCase.
+
+properties:
+  - name: taskId
+    type: string
+    required: true
+    description: Unique business key for the task.
+  - name: name
+    type: string
+    required: true
+    description: Human‑readable task name.
+  - name: status
+    type: string
+    required: true
+    description: Current task status.
+    enum:
+      - NotStarted
+      - InProgress
+      - Blocked
+      - Complete
+  - name: dueDate
+    type: date
+    description: When the task should be completed.
+  - name: owner
+    type: string
+    description: Person or team responsible.
+
+links:
+  - name: caseRef
+    targetType: yourns.IntegrationCase
+    cardinality: ONE
+    description: The IntegrationCase this task belongs to.
+
+sharedProperties:
+  - createdBy
+  - createdAt
+  - modifiedBy
+  - modifiedAt

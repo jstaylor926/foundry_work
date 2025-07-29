@@ -1,0 +1,45 @@
+# Filename: artifact.yml
+objectType: yourns.Artifact
+label: Artifact
+description: |
+  A deliverable produced during integration (data export, model binary, report, etc.).
+
+properties:
+  - name: artifactId
+    type: string
+    required: true
+    description: Unique business key for the artifact.
+  - name: name
+    type: string
+    required: true
+    description: Human‑readable artifact name.
+  - name: artifactType
+    type: string
+    description: Category of artifact.
+    enum:
+      - DataExport
+      - ModelBinary
+      - Report
+      - Documentation
+  - name: location
+    type: string
+    description: URI or storage path to retrieve the artifact.
+  - name: createdOn
+    type: date
+    description: When the artifact was produced.
+
+links:
+  - name: caseRef
+    targetType: yourns.IntegrationCase
+    cardinality: ONE
+    description: The IntegrationCase this artifact belongs to.
+  - name: taskRef
+    targetType: yourns.IntegrationTask
+    cardinality: ZERO_OR_ONE
+    description: (Optional) The task that produced this artifact.
+
+sharedProperties:
+  - createdBy
+  - createdAt
+  - modifiedBy
+  - modifiedAt

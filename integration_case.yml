@@ -1,0 +1,61 @@
+# Filename: integration_case.yml
+objectType: yourns.IntegrationCase
+label: Integration Case
+description: |
+  The central record for a partner/model integration workflow.  
+  Tracks lifecycle status, schedule, and upstream/downstream relationships.
+
+properties:
+  - name: caseId
+    type: string
+    required: true
+    description: Unique business key for the integration case.
+  - name: status
+    type: string
+    required: true
+    description: Current progress state.
+    enum:
+      - NotStarted
+      - InProgress
+      - Blocked
+      - Complete
+  - name: phase
+    type: string
+    description: Lifecycle phase.
+    enum:
+      - Prep
+      - Validation
+      - Deployment
+      - Post-Deployment
+  - name: plannedStart
+    type: date
+    description: Scheduled kickoff date.
+  - name: plannedEnd
+    type: date
+    description: Scheduled completion date.
+  - name: actualStart
+    type: date
+    description: When work actually began.
+  - name: actualEnd
+    type: date
+    description: When work actually finished.
+  - name: lastUpdated
+    type: datetime
+    description: Timestamp of last update.
+
+links:
+  - name: partnerRef
+    targetType: yourns.Partner
+    cardinality: ONE
+    description: Which partner this case belongs to.
+  - name: modelRef
+    targetType: yourns.ModelVersion
+    cardinality: ONE
+    description: Which model version is being integrated.
+
+# Optionally, add shared audit props:
+sharedProperties:
+  - createdBy
+  - createdAt
+  - modifiedBy
+  - modifiedAt

@@ -1,0 +1,42 @@
+# Filename: integration_gate.yml
+objectType: yourns.IntegrationGate
+label: Integration Gate
+description: |
+  A formal checkpoint in the integration workflow, marking progress milestones.
+
+properties:
+  - name: gateId
+    type: string
+    required: true
+    description: Unique business key for the gate.
+  - name: name
+    type: string
+    required: true
+    description: Human‑readable gate name (e.g. “Data Ingested”).
+  - name: status
+    type: string
+    required: true
+    description: Current gate status.
+    enum:
+      - Pending
+      - Passed
+      - Failed
+      - Skipped
+  - name: gateDate
+    type: date
+    description: When this gate was reached or evaluated.
+  - name: approver
+    type: string
+    description: Person or role who approved this gate.
+
+links:
+  - name: caseRef
+    targetType: yourns.IntegrationCase
+    cardinality: ONE
+    description: The IntegrationCase this gate belongs to.
+
+sharedProperties:
+  - createdBy
+  - createdAt
+  - modifiedBy
+  - modifiedAt
